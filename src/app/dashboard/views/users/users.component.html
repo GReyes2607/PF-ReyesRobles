@@ -4,4 +4,4 @@
         Nuevo Alumno
     </button>
 </div>
-<app-user-table [dataSource]="users" (deleteUser)="onDeleteUser($event)" (editUser)="onEditUser($event)"></app-user-table>
+<app-user-table [dataSource]="(users | async) || []" (deleteUser)="onDeleteUser($event)" (editUser)="onEditUser($event)"></app-user-table>
