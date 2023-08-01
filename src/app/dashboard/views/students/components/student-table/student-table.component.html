@@ -1,0 +1,31 @@
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef appTamanios="20px"> Id. </th>
+        <td mat-cell *matCellDef="let student"> {{student.id}} </td>
+    </ng-container>
+    <ng-container matColumnDef="fullName">
+        <th mat-header-cell *matHeaderCellDef appTamanios="20px"> Nombre completo </th>
+        <td mat-cell *matCellDef="let student"> {{student | fullName: 'uppercase' }} </td>
+    </ng-container>
+    <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef appTamanios="20px"> Email </th>
+        <td mat-cell *matCellDef="let student"> {{student.email}} </td>
+    </ng-container>
+    <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef appTamanios="20px"> Acciones </th>
+        <td mat-cell *matCellDef="let student">
+            
+            <button [routerLink] = "student.id" mat-icon-button color="primary">
+                <mat-icon>visibility</mat-icon>
+            </button>
+            <button (click)="onEditStudent(student)" mat-icon-button color="primary">
+                <mat-icon>edit</mat-icon>
+            </button>
+            <button (click)="onDeleteStudent(student)" mat-icon-button color="warn">
+                <mat-icon>delete</mat-icon>
+            </button>
+        </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

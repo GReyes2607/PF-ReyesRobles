@@ -13,7 +13,9 @@ import { MatTableModule } from '@angular/material/table';
 import { FullNamePipe } from './pipes/full-name.pipe';
 import { ControlErrorMessagePipe } from './pipes/control-error-message.pipe';
 import { TamaniosDirective } from './directives/tamanios.directive';
-import {MatListModule} from '@angular/material/list';
+import { MatListModule } from '@angular/material/list';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,9 @@ import {MatListModule} from '@angular/material/list';
     FullNamePipe,
     ControlErrorMessagePipe,
     TamaniosDirective,
-    MatListModule
+    MatListModule,
+    MatDatepickerModule,
+    MatNativeDateModule
 
   ]
 })

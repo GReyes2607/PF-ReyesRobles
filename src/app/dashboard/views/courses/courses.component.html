@@ -1,0 +1,7 @@
+<div class="mb-5">
+    <button (click)="onCreateCourse()"  mat-flat-button color="primary" type="button">
+       <mat-icon>add</mat-icon>
+        Nuevo Curso
+    </button>
+</div>
+<app-course-table [dataSource]="(courses | async) || []" (deleteStudent)="onDeleteCourse($event)" (editStudent)="onEditCourse($event)"></app-course-table>

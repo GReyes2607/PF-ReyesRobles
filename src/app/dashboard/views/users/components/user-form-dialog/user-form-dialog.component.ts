@@ -9,6 +9,8 @@ import { User } from '../../models';
   styleUrls: ['./user-form-dialog.component.scss']
 })
 export class UserFormDialogComponent {
+  dialogTitle: string = '';
+  
   nameControl = new FormControl<string | null>(null, [Validators.required, Validators.minLength(3)]);
   surNameControl = new FormControl<string | null>(null, [Validators.required]);
   emailControl = new FormControl<string | null>(null, [Validators.required, Validators.email]);
@@ -22,7 +24,7 @@ export class UserFormDialogComponent {
     password: this.passwordControl
 
   });
-  dialogTitle: string = '';
+ 
   constructor(private dialogRef: MatDialogRef<UserFormDialogComponent>, @Inject(MAT_DIALOG_DATA) private data?: User) {
 
     if (this.data) {
@@ -34,7 +36,7 @@ export class UserFormDialogComponent {
   }
 
   ngOnInit() {
-    this.dialogTitle = this.data ? 'Editar Alumno' : 'Crear Alumno';
+    this.dialogTitle = this.data ? 'Editar Usuario' : 'Crear Usuario';
   }
 
   onSubmit(): void {

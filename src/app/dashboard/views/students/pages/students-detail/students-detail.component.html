@@ -1,0 +1,24 @@
+<button routerLink=".." mat-icon-button>
+    <mat-icon>arrow_back</mat-icon>
+</button>
+<mat-card>
+    <mat-card-content>
+      <h2>Detalles del Usuario</h2>
+      <div>
+        <mat-form-field>
+          <input matInput placeholder="Nombre" [value]="students?.name" disabled>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field>
+          <input matInput placeholder="Apellidos" [value]="students?.surname"  disabled>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field>
+          <input matInput placeholder="Correo" [value]="students?.email"  disabled>
+        </mat-form-field>
+      </div>
+    </mat-card-content>
+  </mat-card>
+  

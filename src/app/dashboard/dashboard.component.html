@@ -1,26 +1,13 @@
 <mat-drawer-container class="example-container" autosize>
-    <mat-drawer [mode]="'over'" #drawer class="example-sidenav" mode="side">
-        <mat-list role="list">
-            <mat-list-item role="listitem"><a style="text-decoration: none;" href="http://"><mat-icon>home</mat-icon> Inicio</a></mat-list-item>
-            <mat-list-item role="listitem"><a style="text-decoration: none;" href="http://"><mat-icon>person</mat-icon> Usuarios</a></mat-list-item>
-            <mat-list-item role="listitem"><a style="text-decoration: none;" href="http://"><mat-icon>group</mat-icon> Alumnos</a></mat-list-item>
-            <mat-list-item role="listitem"><a style="text-decoration: none;" href="http://"><mat-icon>engineering</mat-icon> Cursos</a></mat-list-item>
-            <mat-list-item role="listitem"><a style="text-decoration: none;" href="http://"><mat-icon>school</mat-icon> Clases</a></mat-list-item>
-          </mat-list>
-          
+    <mat-drawer opened mode="over" #drawer class="example-sidenav" mode="side">
+      <app-nav-menu></app-nav-menu>  
     </mat-drawer>
 
     <div class="example-sidenav-content">
-        <mat-toolbar color="primary">
-            <button (click)="drawer.toggle()" mat-icon-button class="example-icon"
-                aria-label="Example icon-button with menu icon">
-                <mat-icon>menu</mat-icon>
-            </button>
-            <span>Listado Alumnos</span>
-        </mat-toolbar>
+       <app-toolbar [drawer]="drawer"></app-toolbar>
 
         <main class="p-3">
-            <app-users></app-users>
+            <router-outlet></router-outlet>
         </main>
     </div>
 </mat-drawer-container>

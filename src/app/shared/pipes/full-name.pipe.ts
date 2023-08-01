@@ -2,8 +2,9 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { User } from 'src/app/dashboard/views/users/models';
 
 @Pipe({
-  name: 'fullName'
+  name: 'fullName',
 })
+
 export class FullNamePipe implements PipeTransform {
 
   transform(user: User, ...args: unknown[]): unknown {
@@ -12,3 +13,4 @@ export class FullNamePipe implements PipeTransform {
   }
 
 }
+

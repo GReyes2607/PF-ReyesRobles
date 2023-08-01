@@ -1,0 +1,36 @@
+<h1 mat-dialog-title>{{dialogTitle}}</h1>
+<div mat-dialog-content>
+    <form [formGroup]="classesForm" class="grid">
+        <div class="field col-6">
+            <mat-form-field class="w-full" appearance="outline">
+                <mat-label>Nombre</mat-label>
+                <input formControlName="name" matInput type="text" name="name">
+                <mat-error *ngFor="let error of nameControl.errors | keyvalue">
+                    {{error| controlErrorMessage}}
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div class="field col-6">
+            <mat-form-field class="w-full" appearance="outline">
+                <mat-label>Turno</mat-label>
+                <input formControlName="turns" matInput type="text" name="turns">
+                <mat-error *ngFor="let error of turnsControl.errors | keyvalue">
+                    {{error| controlErrorMessage}}
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div class="field col-6">
+            <mat-form-field class="w-full" appearance="outline">
+                <mat-label>Nombre curso</mat-label>
+                <input formControlName="nameCourse" matInput type="text" name="nameCourse">
+                <mat-error *ngFor="let error of nameCourseControl.errors | keyvalue">
+                    {{error| controlErrorMessage}}
+                </mat-error>
+            </mat-form-field>
+        </div>
+    </form>
+</div>
+<div class="flex justify-content-end" mat-dialog-actions>
+    <button mat-button mat-dialog-close>Cancelar</button>
+    <button (click)="onSubmit()" type="submit" mat-button>Guardar</button>
+</div>

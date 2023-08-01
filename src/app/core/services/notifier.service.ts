@@ -30,4 +30,12 @@ export class NotifierService {
       title
     });
   }
+
+  getError(message: string, title= 'Error' ): void {
+    this.notifier$.next({
+      type: 'error',
+      message,
+      title
+    });
+  }
 }

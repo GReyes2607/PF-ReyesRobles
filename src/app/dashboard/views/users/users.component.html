@@ -1,7 +1,7 @@
 <div class="mb-5">
     <button (click)="onCreateUser()" mat-flat-button color="primary" type="button">
         <mat-icon>add</mat-icon>
-        Nuevo Alumno
+        Nuevo Usuario
     </button>
 </div>
 <app-user-table [dataSource]="(users | async) || []" (deleteUser)="onDeleteUser($event)" (editUser)="onEditUser($event)"></app-user-table>
