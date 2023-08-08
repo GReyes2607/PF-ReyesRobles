@@ -5,7 +5,9 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { UserFormDialogComponent } from './components/user-form-dialog/user-form-dialog.component';
 import { UserTableComponent } from './components/user-table/user-table.component';
 import { UsersDetailComponent } from './pages/users-detail/users-detail.component';
-import { RouterLink } from '@angular/router';
+import { RouterModule } from '@angular/router';
+import { DashboardRoutingModule } from '../../dashboard-routing.module';
+import { UsersRoutingModule } from './users-routing.module';
 
 
 
@@ -19,7 +21,9 @@ import { RouterLink } from '@angular/router';
   imports: [
     CommonModule,
     SharedModule,
-    RouterLink
+    RouterModule,
+    DashboardRoutingModule
+    //UsersRoutingModule
   ],
   exports: [
     UsersComponent

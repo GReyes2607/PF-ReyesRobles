@@ -2,10 +2,11 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CoursesComponent } from './courses.component';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { RouterLink } from '@angular/router';
+import { RouterLink, RouterModule } from '@angular/router';
 import { CourseTableComponent } from './components/course-table/course-table.component';
 import { CourseFormDialogComponent } from './components/course-form-dialog/course-form-dialog.component';
 import { CoursesDetailComponent } from './pages/courses-detail/courses-detail.component';
+import { CoursesRoutingModule } from './courses-routing.module';
 
 
 
@@ -19,7 +20,9 @@ import { CoursesDetailComponent } from './pages/courses-detail/courses-detail.co
   imports: [
     CommonModule,
     SharedModule,
-    RouterLink
+    RouterLink,
+    RouterModule,
+    CoursesRoutingModule
   ]
 })
 export class CoursesModule { }

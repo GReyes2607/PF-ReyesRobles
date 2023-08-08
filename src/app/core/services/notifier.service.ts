@@ -8,6 +8,7 @@ interface myNotification {
   message: string;
 }
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -20,7 +21,7 @@ export class NotifierService {
       next: (myCustomNotificacion) => {
         Swal.fire(myCustomNotificacion.title, myCustomNotificacion.message, myCustomNotificacion.type)
       }
-    })
+    });
   }
 
   showSuccess(message: string, title = 'Realizado'): void {
@@ -31,7 +32,7 @@ export class NotifierService {
     });
   }
 
-  getError(message: string, title= 'Error' ): void {
+  getError(message: string, title = 'Error'): void {
     this.notifier$.next({
       type: 'error',
       message,

@@ -12,10 +12,12 @@ import { ClassesFormDialogComponent } from './components/classes-form-dialog/cla
 })
 export class ClassesComponent {
   public classes: Observable<Classes[]>;
+  public isLoading$: Observable<boolean>;
   public destroy = new Subject<boolean>();
 
   constructor(private matDialog: MatDialog, private classesService: ClassesService) {
     this.classesService.loadClasses();
+    this.isLoading$ = classesService.isLoading$;
     this.classes = this.classesService.getClasses();
 
   }
@@ -36,7 +38,7 @@ export class ClassesComponent {
   }
 
   onDeleteClasses(classesDelete: Classes): void {
-    if (confirm(`¿Esta seguro que desea eliminar el curso ${classesDelete.name} ?`)) {
+    if (confirm(`¿Esta seguro que desea eliminar la clase ${classesDelete.name} ?`)) {
       this.classesService.deleteClassesById(classesDelete.id);
     }
 

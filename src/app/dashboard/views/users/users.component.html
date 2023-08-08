@@ -4,4 +4,17 @@
         Nuevo Usuario
     </button>
 </div>
-<app-user-table [dataSource]="(users | async) || []" (deleteUser)="onDeleteUser($event)" (editUser)="onEditUser($event)"></app-user-table>
+
+<ng-container
+  *ngIf="isLoading$ | async; then isLoading; else isNotLoading">
+</ng-container>
+
+<ng-template #isLoading>
+    <div>Cargando...</div>
+</ng-template>
+
+<ng-template #isNotLoading>
+    <app-user-table [dataSource]="(users | async) || []" (deleteUser)="onDeleteUser($event)"
+        (editUser)="onEditUser($event)">
+    </app-user-table>
+</ng-template>

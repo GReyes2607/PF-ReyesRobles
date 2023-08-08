@@ -14,9 +14,11 @@ import { Observable, Subject } from 'rxjs';
 })
 export class UsersComponent {
   public users: Observable<User[]>;
+  public isLoading$: Observable<boolean>;
   public destroy = new Subject<boolean>();
 
   constructor(private matDialog: MatDialog, private userService: UserService, private notifier: NotifierService) {
+    this.isLoading$ = this.userService.isLoading$;
     this.userService.loadUsers();
     this.users = this.userService.getUsers();
 

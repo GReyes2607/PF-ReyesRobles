@@ -1,0 +1,53 @@
+{
+  "users": [
+    {
+      "name": "Gustavo",
+      "surname": "Reyes Robles",
+      "email": "gustavo_reyes@hotmail.es",
+      "password": "123456",
+      "id": 1
+    }
+  ],
+  "students": [
+    {
+      "name": "Gustavo",
+      "surname": "Reyes",
+      "email": "gustavo.reyes@hotmail.es",
+      "id": 1
+    },
+    {
+      "name": "Jose",
+      "surname": "Perez",
+      "email": "jperez@mail.com",
+      "id": 2
+    }
+  ],
+  "classes": [
+    {
+      "name": "Clase #123456",
+      "turns": "Matutino",
+      "nameCourse": "Excel basico",
+      "id": 1
+    },
+    {
+      "name": "Clase #78901",
+      "turns": "Vespertino",
+      "nameCourse": "Excel avanzado",
+      "id": 2
+    }
+  ],
+  "courses": [
+    {
+      "name": "Excel basico",
+      "type": "Presencial",
+      "instructorName": "Juan Perez",
+      "id": 1
+    },
+    {
+      "name": "Excel avanzado",
+      "type": "Presencial",
+      "instructorName": "Jose Ramirez",
+      "id": 2
+    }
+  ]
+}

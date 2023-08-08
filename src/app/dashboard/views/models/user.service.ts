@@ -1,24 +1,8 @@
 import { Injectable } from '@angular/core';
 import { CreateUserData, UpdateUserData, User } from '../users/models';
-import { BehaviorSubject, Observable, delay, of, take, map } from 'rxjs';
+import { BehaviorSubject, Observable, take, map } from 'rxjs';
 import { NotifierService } from 'src/app/core/services/notifier.service';
-
-const USER_DB: Observable<User[]> = of([
-  {
-    id: 1,
-    name: 'Gustavo',
-    surname: 'Reyes Robles',
-    email: 'gustavo_reyes@hotmail.es',
-    password: '123456'
-  },
-  {
-    id: 2,
-    name: 'Juan Carlos',
-    surname: 'Dominguez Gomez',
-    email: 'jcdg83@gmail.com',
-    password: '123456'
-  }
-]).pipe(delay(1000))
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -28,14 +12,24 @@ export class UserService {
   private _users$ = new BehaviorSubject<User[]>([]);
   private users$ = this._users$.asObservable();
 
+  private _isLoading$ = new BehaviorSubject(false);
+  public isLoading$ = this._isLoading$.asObservable();
 
-  constructor(private notifier: NotifierService) { }
+  constructor(private notifier: NotifierService, private httpClient: HttpClient) { }
 
   loadUsers(): void {
-    USER_DB.subscribe({
-      next: (userDB) => this._users$.next(userDB)
+    this._isLoading$.next(true);
+    this.httpClient.get<User[]>('http://localhost:3000/users').subscribe({
+      next: (response) => {
+        this._users$.next(response)
+      },
+      error: () => {
+        this.notifier.getError('Error al cargar Usuarios');
+      },
+      complete: () => {
+        this._isLoading$.next(false);
+      },
     })
-
   }
 
   getUsers(): Observable<User[]> {
@@ -51,39 +45,39 @@ export class UserService {
 
 
   createUser(user: CreateUserData): void {
-    this.users$.pipe(take(1)).subscribe({
-      next: (usuariosActuales) => {
-        this._users$.next(
-          [...usuariosActuales,
-          {
-            ...user,
-            id: usuariosActuales.length + 1
-          }
-          ]);
+    this.httpClient.post('http://localhost:3000/users', user).subscribe({
+      next: () => {
         this.notifier.showSuccess('Usuario Creado Correctamente');
-      }
-    })
+        this.loadUsers();
+      },
+      error: () => {
+        this.notifier.getError('Error al crear');
+      },
 
+    })
   }
 
   updateUserById(id: number, userUpdate: UpdateUserData): void {
-    this.users$.pipe(take(1)).subscribe({
-      next: (actual) => {
-        this._users$.next(
-          actual.map((u) =>
-            u.id === id ? { ...u, ...userUpdate } : u
-          )
-        );
-        this.notifier.showSuccess('Usuario actualizado correctamente');
+    this.httpClient.put('http://localhost:3000/users/' + id, userUpdate).subscribe({
+      next: () => {
+          this.notifier.showSuccess('Usuario actualizado correctamente');
+          this.loadUsers();
+      }, 
+      error: () => {
+        this.notifier.getError('Error al actualizar el usuario')
       }
-    });
+    })
   }
 
   deleteUserById(id: number): void {
-    this._users$.pipe(take(1)).subscribe({
-      next: (actual) =>
-        this._users$.next(actual.filter((user) => user.id !== id)),
-    });
-    this.notifier.showSuccess('Usuario eliminado correctamente');
+    this.httpClient.delete('http://localhost:3000/users/' + id).subscribe({
+      next: () => {
+          this.notifier.showSuccess('Usuario eliminado correctamente');
+          this.loadUsers();
+      },
+      error: () => {
+        this.notifier.getError('Error al eliminar el usuario')
+      }
+    })
   }
 }

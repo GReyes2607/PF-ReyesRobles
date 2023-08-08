@@ -13,10 +13,12 @@ import { CourseFormDialogComponent } from './components/course-form-dialog/cours
 })
 export class CoursesComponent {
   public courses: Observable<Courses[]>;
+  public isLoading$: Observable<boolean>;
   public destroy = new Subject<boolean>();
 
   constructor(private matDialog: MatDialog, private courseService: CourseService, private notifier: NotifierService) {
     this.courseService.loadCourses();
+    this.isLoading$ = courseService.isLoading$;
     this.courses = this.courseService.getCourses();
 
   }

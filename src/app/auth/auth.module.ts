@@ -4,7 +4,8 @@ import { AuthComponent } from './auth.component';
 import { LoginComponent } from './views/login/login.component';
 import { RegisterComponent } from './views/register/register.component';
 import { SharedModule } from '../shared/shared.module';
-import { appRoutingModule } from '../app-routing.module';
+import { AuthRoutingModule } from './auth-routing.module';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -17,7 +18,8 @@ import { appRoutingModule } from '../app-routing.module';
   imports: [
     CommonModule,
     SharedModule,
-    appRoutingModule
+    RouterModule,
+    AuthRoutingModule
   ]
 })
 export class AuthModule { }

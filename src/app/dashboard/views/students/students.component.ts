@@ -13,10 +13,12 @@ import { StudentFormDialogComponent } from './components/student-form-dialog/stu
 })
 export class StudentsComponent {
   public students: Observable<Student[]>;
+  public isLoading$: Observable<boolean>;
   public destroy = new Subject<boolean>();
 
   constructor(private matDialog: MatDialog, private studentService: StudentService, private notifier: NotifierService) {
     this.studentService.loadStudents();
+    this.isLoading$ = studentService.isLoading$;
     this.students = this.studentService.getStudents();
 
   }
