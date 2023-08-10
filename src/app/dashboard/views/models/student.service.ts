@@ -3,6 +3,7 @@ import { CreateStudentData, UpdateStudentData, Student } from '../students/model
 import { BehaviorSubject, Observable, delay, of, take, map } from 'rxjs';
 import { NotifierService } from 'src/app/core/services/notifier.service';
 import { HttpClient } from '@angular/common/http';
+import { enviroment } from 'src/enviroments/enviroment';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,7 @@ export class StudentService {
 
   loadStudents(): void {
     this._isLoading$.next(true);
-    this.httpClient.get<Student[]>('http://localhost:3000/students').subscribe({
+    this.httpClient.get<Student[]>(enviroment.baseApiUrl + 'students').subscribe({
       next: (response) => {
         this._students$.next(response);
       },
@@ -46,7 +47,7 @@ export class StudentService {
 
 
   createStudent(student: CreateStudentData): void {
-    this.httpClient.post('http://localhost:3000/students', student).subscribe({
+    this.httpClient.post(enviroment.baseApiUrl + 'students', student).subscribe({
       next: () => {
         this.notifier.showSuccess('Alumno Creado Correctamente');
         this.loadStudents();
@@ -58,7 +59,7 @@ export class StudentService {
   }
 
   updateStudentById(id: number, studentUpdate: UpdateStudentData): void {
-    this.httpClient.put('http://localhost:3000/students/' + id, studentUpdate).subscribe({
+    this.httpClient.put(enviroment.baseApiUrl + 'students/' + id, studentUpdate).subscribe({
       next: () => {
           this.notifier.showSuccess('Alumno actualizado correctamente');
           this.loadStudents();
@@ -70,7 +71,7 @@ export class StudentService {
   }
 
   deleteStudentById(id: number): void {
-    this.httpClient.delete('http://localhost:3000/students/' + id).subscribe({
+    this.httpClient.delete(enviroment.baseApiUrl + 'students/' + id).subscribe({
       next: () => {
           this.notifier.showSuccess('Alumno eliminado correctamente');
           this.loadStudents();

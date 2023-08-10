@@ -4,13 +4,14 @@ export interface User {
     surname: string;
     email: string;
     password: string;
+    token: string;
 }
 
 export interface CreateUserData {
     name: string;
     surname: string;
     email: string;
-    password: string;  
+    password: string; 
 }
 
 export interface UpdateUserData {

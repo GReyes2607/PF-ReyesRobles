@@ -3,6 +3,8 @@ import { CreateUserData, UpdateUserData, User } from '../users/models';
 import { BehaviorSubject, Observable, take, map } from 'rxjs';
 import { NotifierService } from 'src/app/core/services/notifier.service';
 import { HttpClient } from '@angular/common/http';
+import { generateRandomString } from 'src/app/shared/utils/helpers';
+import { enviroment } from 'src/enviroments/enviroment';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +12,7 @@ import { HttpClient } from '@angular/common/http';
 export class UserService {
 
   private _users$ = new BehaviorSubject<User[]>([]);
-  private users$ = this._users$.asObservable();
+  public users$ = this._users$.asObservable();
 
   private _isLoading$ = new BehaviorSubject(false);
   public isLoading$ = this._isLoading$.asObservable();
@@ -19,7 +21,7 @@ export class UserService {
 
   loadUsers(): void {
     this._isLoading$.next(true);
-    this.httpClient.get<User[]>('http://localhost:3000/users').subscribe({
+    this.httpClient.get<User[]>(enviroment.baseApiUrl +'users').subscribe({
       next: (response) => {
         this._users$.next(response)
       },
@@ -45,7 +47,10 @@ export class UserService {
 
 
   createUser(user: CreateUserData): void {
-    this.httpClient.post('http://localhost:3000/users', user).subscribe({
+
+    const token = generateRandomString(20);
+
+    this.httpClient.post(enviroment.baseApiUrl + 'users', {...user, token}).subscribe({
       next: () => {
         this.notifier.showSuccess('Usuario Creado Correctamente');
         this.loadUsers();
@@ -58,7 +63,7 @@ export class UserService {
   }
 
   updateUserById(id: number, userUpdate: UpdateUserData): void {
-    this.httpClient.put('http://localhost:3000/users/' + id, userUpdate).subscribe({
+    this.httpClient.put(enviroment.baseApiUrl + 'users/' + id, userUpdate).subscribe({
       next: () => {
           this.notifier.showSuccess('Usuario actualizado correctamente');
           this.loadUsers();
@@ -70,7 +75,7 @@ export class UserService {
   }
 
   deleteUserById(id: number): void {
-    this.httpClient.delete('http://localhost:3000/users/' + id).subscribe({
+    this.httpClient.delete(enviroment.baseApiUrl + 'users/' + id).subscribe({
       next: () => {
           this.notifier.showSuccess('Usuario eliminado correctamente');
           this.loadUsers();

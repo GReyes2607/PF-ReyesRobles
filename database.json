@@ -5,7 +5,16 @@
       "surname": "Reyes Robles",
       "email": "gustavo_reyes@hotmail.es",
       "password": "123456",
+      "token": "Dm8EYB0JoG1uIBYgj7mt",
       "id": 1
+    },
+    {
+      "name": "Juan ",
+      "surname": "Perez",
+      "email": "jperez@mail.com",
+      "password": "123456",
+      "token": "Dm9ETB0JoG0uIBYgj9mt",
+      "id": 2
     }
   ],
   "students": [

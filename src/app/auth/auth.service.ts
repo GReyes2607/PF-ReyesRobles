@@ -4,7 +4,8 @@ import { BehaviorSubject, Observable, map, take } from 'rxjs';
 import { User } from '../dashboard/views/users/models';
 import { NotifierService } from '../core/services/notifier.service';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { enviroment } from 'src/enviroments/enviroment';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -15,24 +16,37 @@ export class AuthService {
     constructor(private notifier: NotifierService, private router: Router, private httpClient: HttpClient) { }
 
     isAuthenticated(): Observable<boolean> {
-        return this.authUser$.pipe(take(1),
-        map((user) => !!user))
+        return this.httpClient.get<User[]>(enviroment.baseApiUrl + 'users', {
+            params: {
+                token: localStorage.getItem('token') || '',
+            }
+        }).pipe(map((usersResult) => {
+            return !!usersResult.length
+        })
+        )
     }
 
     login(data: LoginData): void {
-        this.httpClient.get<User[]>('http://localhost:3000/users', {
+        this.httpClient.get<User[]>(enviroment.baseApiUrl +  'users', {
             params: {
                 email: data.email || '',
-                password: data.password ||''
+                password: data.password || ''
             }
         }).subscribe({
             next: (response) => {
-                if(response.length) {
-                    this._authUser$.next(response[0]);
+                if (response.length) {
+                    const authUser = response[0];
+                    this._authUser$.next(authUser);
                     this.router.navigate(['/dashboard']);
+                    localStorage.setItem('token', authUser.token);
                 } else {
                     this._authUser$.next(null);
-                    this.notifier.getError('Email o contraseña invalido'); 
+                    this.notifier.getError('Email o contraseña invalido');
+                }
+            },
+            error: (e) => {
+                if (e instanceof HttpErrorResponse) {
+                    this.notifier.getError('ocurrio un error inesperado');
                 }
             }
         })

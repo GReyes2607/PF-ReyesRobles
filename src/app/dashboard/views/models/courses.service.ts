@@ -3,6 +3,7 @@ import { BehaviorSubject, Observable, take, map } from 'rxjs';
 import { NotifierService } from 'src/app/core/services/notifier.service';
 import { Courses, CreateCourseData, UpdateCourseData } from '../courses/models';
 import { HttpClient } from '@angular/common/http';
+import { enviroment } from 'src/enviroments/enviroment';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +21,7 @@ export class CourseService {
 
   loadCourses(): void {
     this._isLoading$.next(true);
-    this.httpClient.get<Courses[]>('http://localhost:3000/courses').subscribe({
+    this.httpClient.get<Courses[]>(enviroment.baseApiUrl + 'courses').subscribe({
       next: (response) => {
         this._courses$.next(response);
       },
@@ -47,7 +48,7 @@ export class CourseService {
 
 
   createCourse(courses: CreateCourseData): void {
-    this.httpClient.post('http://localhost:3000/courses', courses).subscribe({
+    this.httpClient.post(enviroment.baseApiUrl + 'courses', courses).subscribe({
       next: () => {
         this.notifier.showSuccess('Curso Creado Correctamente');
         this.loadCourses();
@@ -60,7 +61,7 @@ export class CourseService {
   }
 
   updateCourseById(id: number, courseUpdate: UpdateCourseData): void {
-    this.httpClient.put('http://localhost:3000/courses/' + id, courseUpdate).subscribe({
+    this.httpClient.put(enviroment.baseApiUrl + 'courses/' + id, courseUpdate).subscribe({
       next: () => {
           this.notifier.showSuccess('Curso actualizado correctamente');
           this.loadCourses();
@@ -72,7 +73,7 @@ export class CourseService {
   }
 
   deleteCourseById(id: number): void {
-    this.httpClient.delete('http://localhost:3000/courses/' + id).subscribe({
+    this.httpClient.delete(enviroment.baseApiUrl + 'courses/' + id).subscribe({
       next: () => {
           this.notifier.showSuccess('Curso eliminado correctamente');
           this.loadCourses();

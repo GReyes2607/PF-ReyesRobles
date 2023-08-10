@@ -8,7 +8,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatTableModule } from '@angular/material/table';
 import { FullNamePipe } from './pipes/full-name.pipe';
 import { ControlErrorMessagePipe } from './pipes/control-error-message.pipe';
@@ -21,7 +21,7 @@ import { MatNativeDateModule } from '@angular/material/core';
   declarations: [
     FullNamePipe,
     ControlErrorMessagePipe,
-    TamaniosDirective
+    TamaniosDirective,
   ],
   imports: [
     CommonModule
@@ -42,7 +42,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     TamaniosDirective,
     MatListModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
 
   ]
 })

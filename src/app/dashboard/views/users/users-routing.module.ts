@@ -6,10 +6,10 @@ import { UsersDetailComponent } from "./pages/users-detail/users-detail.componen
 @NgModule({
     imports: [
         RouterModule.forChild([
-            // {
-            //     path: '',
-            //     component: UsersComponent,
-            // },
+            {
+                path: '',
+                component: UsersComponent,
+            },
             {
                 path: ':id',
                 component: UsersDetailComponent,

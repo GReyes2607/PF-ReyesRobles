@@ -3,27 +3,8 @@ import { BehaviorSubject, Observable, delay, of, take, map } from 'rxjs';
 import { NotifierService } from 'src/app/core/services/notifier.service';
 import { Classes, CreateClassesData, UpdateClassesData } from '../classes/models';
 import { HttpClient } from '@angular/common/http';
+import { enviroment } from 'src/enviroments/enviroment';
 
-// const CLASSES_DB: Observable<Classes[]> = of([
-//   {
-//     id: 1,
-//     name: 'Clase #1245',
-//     turns: 'Matutino',
-//     nameCourse: 'Excel basico',
-//   },
-//   {
-//     id: 2,
-//     name: 'Clase #56245',
-//     turns: 'Vespertino',
-//     nameCourse: 'Excel basico',
-//   },
-//   {
-//     id: 3,
-//     name: 'Clase #57845',
-//     turns: 'Nocturno',
-//     nameCourse: 'Inteligencia emocional',
-//   }
-// ]).pipe(delay(1000))
 
 @Injectable({
   providedIn: 'root'
@@ -41,7 +22,7 @@ export class ClassesService {
 
   loadClasses(): void {
     this._isLoading$.next(true);
-    this.httpClient.get<Classes[]>('http://localhost:3000/classes').subscribe({
+    this.httpClient.get<Classes[]>(enviroment.baseApiUrl + 'classes').subscribe({
       next: (response) => {
         this._classes$.next(response);
       },
@@ -68,7 +49,7 @@ export class ClassesService {
 
 
   createClasses(classes: CreateClassesData): void {
-    this.httpClient.post('http://localhost:3000/classes', classes).subscribe({
+    this.httpClient.post(enviroment.baseApiUrl + 'classes', classes).subscribe({
       next: () => {
         this.notifier.showSuccess('Clase Creada Correctamente');
         this.loadClasses();
@@ -81,7 +62,7 @@ export class ClassesService {
   }
 
   updateClassesById(id: number, classesUpdate: UpdateClassesData): void {
-    this.httpClient.put('http://localhost:3000/classes/' + id, classesUpdate).subscribe({
+    this.httpClient.put( enviroment.baseApiUrl + 'classes/' + id, classesUpdate).subscribe({
       next: () => {
           this.notifier.showSuccess('Clase actualizada correctamente');
           this.loadClasses();
@@ -93,7 +74,7 @@ export class ClassesService {
   }
 
   deleteClassesById(id: number): void {
-    this.httpClient.delete('http://localhost:3000/classes/' + id).subscribe({
+    this.httpClient.delete(enviroment.baseApiUrl + 'classes/' + id).subscribe({
       next: () => {
           this.notifier.showSuccess('Clase eliminada correctamente');
           this.loadClasses();

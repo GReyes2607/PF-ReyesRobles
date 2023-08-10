@@ -13,7 +13,6 @@ import { UsersDetailComponent } from './views/users/pages/users-detail/users-det
             },
             {
                 path: 'users',
-                component: UsersComponent,
                 children: [
                     {
                         path: '',
