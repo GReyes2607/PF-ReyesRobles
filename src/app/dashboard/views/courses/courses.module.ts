@@ -7,6 +7,8 @@ import { CourseTableComponent } from './components/course-table/course-table.com
 import { CourseFormDialogComponent } from './components/course-form-dialog/course-form-dialog.component';
 import { CoursesDetailComponent } from './pages/courses-detail/courses-detail.component';
 import { CoursesRoutingModule } from './courses-routing.module';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
 
 
 

@@ -6,6 +6,7 @@
       "email": "gustavo_reyes@hotmail.es",
       "password": "123456",
       "token": "Dm8EYB0JoG1uIBYgj7mt",
+      "role": "admin",
       "id": 1
     },
     {
@@ -13,14 +14,15 @@
       "surname": "Perez",
       "email": "jperez@mail.com",
       "password": "123456",
-      "token": "Dm9ETB0JoG0uIBYgj9mt",
+      "role": "user",
+      "token": "Dm8EYB6JoG4uIBYgj7yw",
       "id": 2
     }
   ],
   "students": [
     {
       "name": "Gustavo",
-      "surname": "Reyes",
+      "surname": "Reyes Robles",
       "email": "gustavo.reyes@hotmail.es",
       "id": 1
     },
@@ -36,13 +38,31 @@
       "name": "Clase #123456",
       "turns": "Matutino",
       "nameCourse": "Excel basico",
+      "studentId": 2,
+      "courseId": 1,
       "id": 1
     },
     {
       "name": "Clase #78901",
       "turns": "Vespertino",
       "nameCourse": "Excel avanzado",
+      "studentId": 1,
+      "courseId": 2,
       "id": 2
+    },
+    {
+      "name": "Clase #1234",
+      "turns": "Matutino",
+      "courseId": 1,
+      "studentId": 2,
+      "id": 3
+    },
+    {
+      "name": "clase #1092",
+      "turns": "Vespertino",
+      "courseId": 2,
+      "studentId": 1,
+      "id": 4
     }
   ],
   "courses": [

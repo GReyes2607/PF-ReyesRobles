@@ -1,27 +1,28 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, take, map } from 'rxjs';
 import { NotifierService } from 'src/app/core/services/notifier.service';
-import { Courses, CreateCourseData, UpdateCourseData } from '../courses/models';
+import { Course, CreateCourseData, UpdateCourseData } from '../courses/models';
 import { HttpClient } from '@angular/common/http';
 import { enviroment } from 'src/enviroments/enviroment';
+import { Store } from '@ngrx/store';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CourseService {
 
-  private _courses$ = new BehaviorSubject<Courses[]>([]);
+  private _courses$ = new BehaviorSubject<Course[]>([]);
   private courses$ = this._courses$.asObservable();
 
   private _isLoading$ = new BehaviorSubject(false);
   public isLoading$ = this._isLoading$.asObservable();
 
 
-  constructor(private notifier: NotifierService, private httpClient: HttpClient) { }
+  constructor(private notifier: NotifierService, private httpClient: HttpClient, private store: Store) { }
 
   loadCourses(): void {
     this._isLoading$.next(true);
-    this.httpClient.get<Courses[]>(enviroment.baseApiUrl + 'courses').subscribe({
+    this.httpClient.get<Course[]>(enviroment.baseApiUrl + 'courses').subscribe({
       next: (response) => {
         this._courses$.next(response);
       },
@@ -35,11 +36,11 @@ export class CourseService {
   
   }
 
-  getCourses(): Observable<Courses[]> {
+  getCourses(): Observable<Course[]> {
     return this.courses$
   }
 
-  getCoursesById(id: number): Observable<Courses | undefined> {
+  getCoursesById(id: number): Observable<Course | undefined> {
     return this._courses$.pipe(
       map((courses) => courses.find((c) => c.id === id)),
       take(1)

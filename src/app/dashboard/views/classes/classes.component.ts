@@ -4,6 +4,8 @@ import { Classes } from './models';
 import { MatDialog } from '@angular/material/dialog';
 import { ClassesService } from '../models/classes.service';
 import { ClassesFormDialogComponent } from './components/classes-form-dialog/classes-form-dialog.component';
+import { Store } from '@ngrx/store';
+import { selectIsAdmin } from 'src/app/store/auth/auth.selector';
 
 @Component({
   selector: 'app-classes',
@@ -15,10 +17,13 @@ export class ClassesComponent {
   public isLoading$: Observable<boolean>;
   public destroy = new Subject<boolean>();
 
-  constructor(private matDialog: MatDialog, private classesService: ClassesService) {
+  public isAdmin$: Observable<boolean>;
+
+  constructor(private matDialog: MatDialog, private classesService: ClassesService, private store: Store) {
     this.classesService.loadClasses();
     this.isLoading$ = classesService.isLoading$;
     this.classes = this.classesService.getClasses();
+    this.isAdmin$ = this.store.select(selectIsAdmin);
 
   }
 
@@ -30,7 +35,8 @@ export class ClassesComponent {
             this.classesService.createClasses({
               name: newClasse.name,
               turns: newClasse.turns,
-              nameCourse: newClasse.nameCourse,
+              courseId: newClasse.courseId,
+              studentId: newClasse.studentId
             })
           }
         }

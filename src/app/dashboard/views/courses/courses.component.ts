@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { Courses } from './models';
+import { Course } from './models';
 import { MatDialog } from '@angular/material/dialog';
 import { NotifierService } from 'src/app/core/services/notifier.service';
 import { CourseService } from '../models/courses.service';
 import { CourseFormDialogComponent } from './components/course-form-dialog/course-form-dialog.component';
+import { Store } from '@ngrx/store';
+import { selectIsAdmin } from 'src/app/store/auth/auth.selector';
 
 @Component({
   selector: 'app-courses',
@@ -12,14 +14,16 @@ import { CourseFormDialogComponent } from './components/course-form-dialog/cours
   styleUrls: ['./courses.component.scss']
 })
 export class CoursesComponent {
-  public courses: Observable<Courses[]>;
+  public courses: Observable<Course[] | null>;
   public isLoading$: Observable<boolean>;
   public destroy = new Subject<boolean>();
+  public isAdmin$: Observable<boolean>;
 
-  constructor(private matDialog: MatDialog, private courseService: CourseService, private notifier: NotifierService) {
+  constructor(private store: Store, private matDialog: MatDialog, private courseService: CourseService, private notifier: NotifierService) {
     this.courseService.loadCourses();
     this.isLoading$ = courseService.isLoading$;
     this.courses = this.courseService.getCourses();
+    this.isAdmin$ = this.store.select(selectIsAdmin);
 
   }
 
@@ -38,14 +42,14 @@ export class CoursesComponent {
       })
   }
 
-  onDeleteCourse(courseDelete: Courses): void {
+  onDeleteCourse(courseDelete: Course): void {
     if (confirm(`¿Esta seguro que desea eliminar el curso ${courseDelete.name} ?`)) {
       this.courseService.deleteCourseById(courseDelete.id);
     }
 
   }
 
-  onEditCourse(courseEdit: Courses): void {
+  onEditCourse(courseEdit: Course): void {
     this.matDialog.open(CourseFormDialogComponent, {
       data: courseEdit
     })

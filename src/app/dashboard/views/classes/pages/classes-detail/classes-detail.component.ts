@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Classes } from '../../models';
+import { Classes, ClassesWithStudentsAndCourse } from '../../models';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NotifierService } from 'src/app/core/services/notifier.service';
 import { ClassesService } from '../../../models/classes.service';
@@ -12,7 +12,7 @@ import { ClassesService } from '../../../models/classes.service';
 })
 export class ClassesDetailComponent {
   public classesId?: number;
-  public classes: Classes | undefined;
+  public classes: ClassesWithStudentsAndCourse | undefined;
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,

@@ -33,7 +33,8 @@ export class UsersComponent {
               name: newUser.name,
               surname: newUser.surname,
               email: newUser.email,
-              password: newUser.password
+              password: newUser.password,
+              role: newUser.role
             })
           }
         }

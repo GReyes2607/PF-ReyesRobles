@@ -1,8 +1,8 @@
 <mat-nav-list>
     <a routerLink="home" mat-list-item><mat-icon>home</mat-icon>Inicio</a>
-    <a routerLink="users" mat-list-item><mat-icon>engineering</mat-icon>Usuarios</a>
+    <a *ngIf="selectIsAdmin$ | async" routerLink="users" mat-list-item><mat-icon>engineering</mat-icon>Usuarios</a>
     <a routerLink="students" mat-list-item><mat-icon>person</mat-icon>Alumnos</a>
     <a routerLink="courses" mat-list-item><mat-icon>diversity_3</mat-icon>Cursos</a>
-    <a routerLink="classes" mat-list-item><mat-icon>groups</mat-icon>Clases</a>
+    <a routerLink="classes" mat-list-item><mat-icon>groups</mat-icon>Inscripciones</a>
     <a (click)="logout()" mat-list-item><mat-icon>logout</mat-icon>Salir</a>
 </mat-nav-list>

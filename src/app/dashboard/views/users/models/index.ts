@@ -5,6 +5,7 @@ export interface User {
     email: string;
     password: string;
     token: string;
+    role: string;
 }
 
 export interface CreateUserData {
@@ -12,11 +13,13 @@ export interface CreateUserData {
     surname: string;
     email: string;
     password: string; 
+    role: string;
 }
 
 export interface UpdateUserData {
     name?: string;
     surname?: string;
     email?: string;
-    password?: string;   
+    password?: string;
+    role?: string;   
 }

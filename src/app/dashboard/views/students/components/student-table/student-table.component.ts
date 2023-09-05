@@ -1,5 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Student } from '../../models';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { selectIsAdmin } from 'src/app/store/auth/auth.selector';
 
 @Component({
   selector: 'app-student-table',
@@ -25,6 +28,12 @@ export class StudentTableComponent {
 
   onEditStudent(StudentEdit: Student): void {
     this.editStudent.emit(StudentEdit);
+  }
+
+  public isAdmin$: Observable<boolean>;
+
+  constructor(private store: Store) {
+    this.isAdmin$ = this.store.select(selectIsAdmin);
   }
 
 }

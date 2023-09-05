@@ -4,7 +4,8 @@
             aria-label="Example icon-button with menu icon">
             <mat-icon>menu</mat-icon>
         </button>
-        <span>Panel Inicial</span>
+        <!-- <span>Panel Inicial</span> -->
+        <span>{{currentViewName}}</span>
     </div>
 
     <p *ngIf="authUser$ | async; let authUser">

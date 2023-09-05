@@ -3,6 +3,7 @@ import { RouterModule } from '@angular/router';
 import { HomeComponent } from './views/home/home.component';
 import { UsersComponent } from './views/users/users.component';
 import { UsersDetailComponent } from './views/users/pages/users-detail/users-detail.component';
+import { adminGuard } from '../core/guards/admin.guard';
 
 @NgModule({
     imports: [
@@ -13,6 +14,7 @@ import { UsersDetailComponent } from './views/users/pages/users-detail/users-det
             },
             {
                 path: 'users',
+                canActivate: [adminGuard],
                 children: [
                     {
                         path: '',

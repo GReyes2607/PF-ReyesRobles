@@ -1,5 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Courses } from '../../models';
+import { Course } from '../../models';
+import { selectIsAdmin } from 'src/app/store/auth/auth.selector';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-course-table',
@@ -8,22 +11,29 @@ import { Courses } from '../../models';
 })
 export class CourseTableComponent {
 
+  public isAdmin$: Observable<boolean>;
+
+  constructor(private store: Store) {
+    this.isAdmin$ = this.store.select(selectIsAdmin);
+
+  }
+
   displayedColumns: string[] = ['id', 'name', 'type', 'instructorName', 'actions'];
 
   @Input()
-  dataSource: Courses[] = [];
+  dataSource: Course[] = [];
 
   @Output()
-  deleteStudent = new EventEmitter<Courses>();
+  deleteStudent = new EventEmitter<Course>();
 
   @Output()
-  editStudent = new EventEmitter<Courses>();
+  editStudent = new EventEmitter<Course>();
 
-  onDeleteCourse(CourseToDelete: Courses): void{
+  onDeleteCourse(CourseToDelete: Course): void{
     this.deleteStudent.emit(CourseToDelete);
   }
 
-  onEditCourse(CourseEdit: Courses): void {
+  onEditCourse(CourseEdit: Course): void {
     this.editStudent.emit(CourseEdit);
   }
 }

@@ -1,18 +1,19 @@
 <div class="mb-5">
-    <button (click)="onCreateCourse()" mat-flat-button color="primary" type="button">
+    <button  [disabled]="!(isAdmin$ |async)" (click)="onCreateCourse()" mat-flat-button color="primary" type="button">
         <mat-icon>add</mat-icon>
         Nuevo Curso
     </button>
 </div>
 
-<ng-container *ngIf="isLoading$ | async; then isLoading; else isNotLoading">
+<!-- <ng-container *ngIf="isLoading$ | async; then isLoading; else isNotLoading">
 </ng-container>
 
 <ng-template #isLoading>
     <div>Cargando...</div>
 </ng-template>
 
-<ng-template #isNotLoading>
-    <app-course-table [dataSource]="(courses | async) || []" (deleteStudent)="onDeleteCourse($event)"
-        (editStudent)="onEditCourse($event)"></app-course-table>
-</ng-template>
+<ng-template #isNotLoading> -->
+    <!-- <app-course-table [dataSource]="(course | async) || []" (deleteStudent)="onDeleteCourse($event)"
+        (editStudent)="onEditCourse($event)"></app-course-table> -->
+        <app-course-table [dataSource]="(courses | async) || []"></app-course-table>
+<!-- </ng-template> -->

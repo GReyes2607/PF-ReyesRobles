@@ -1,27 +1,29 @@
 <button routerLink=".." mat-icon-button>
-    <mat-icon>arrow_back</mat-icon>
+  <mat-icon>arrow_back</mat-icon>
 </button>
 <mat-card>
-    <mat-card-content>
-      <h2>Detalles del curso</h2>
-      <div>
-        <mat-form-field>
-            <mat-label>Nombre</mat-label>
+  <mat-card-content>
+    <h2>Detalles del curso</h2>
+    <form class="grid">
+      <div class="field col-6">
+        <mat-form-field class="w-full" appearance="outline">
+          <mat-label>Nombre</mat-label>
           <input matInput placeholder="Nombre" [value]="courses?.name" disabled>
         </mat-form-field>
       </div>
-      <div>
-        <mat-form-field>
-            <mat-label>Tipo</mat-label>
-          <input matInput placeholder="Tipo" [value]="courses?.type"  disabled>
+      <div class="field col-6">
+        <mat-form-field class="w-full" appearance="outline">
+          <mat-label>Tipo</mat-label>
+          <input matInput placeholder="Tipo" [value]="courses?.type" disabled>
         </mat-form-field>
       </div>
-      <div>
-        <mat-form-field>
-            <mat-label>Nombre instructor</mat-label>
-          <input matInput placeholder="Nombre instructor" [value]="courses?.instructorName"  disabled>
+      <div class="field col-6">
+        <mat-form-field class="w-full" appearance="outline">
+          <mat-label>Nombre instructor</mat-label>
+          <input matInput placeholder="Nombre instructor"
+            [value]="courses?.instructorName" disabled>
         </mat-form-field>
       </div>
-    </mat-card-content>
-  </mat-card>
-  
+    </form>
+  </mat-card-content>
+</mat-card>

@@ -21,11 +21,24 @@
         </div>
         <div class="field col-6">
             <mat-form-field class="w-full" appearance="outline">
-                <mat-label>Nombre curso</mat-label>
-                <input formControlName="nameCourse" matInput type="text" name="nameCourse">
-                <mat-error *ngFor="let error of nameCourseControl.errors | keyvalue">
-                    {{error| controlErrorMessage}}
-                </mat-error>
+                <mat-label>Curso</mat-label>
+                <mat-select [formControl]="courseIdcontrol">
+                    <mat-option [value]="course.id"
+                        *ngFor="let course of courseOptions$ | async">
+                        {{course.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="field col-6">
+            <mat-form-field class="w-full" appearance="outline">
+                <mat-label>Alumno</mat-label>
+                <mat-select [formControl]="studentIdcontrol">
+                    <mat-option [value]="student.id"
+                        *ngFor="let student of studentOptions$ | async">
+                        {{student.name + ' ' + student.surname}}
+                    </mat-option>
+                </mat-select>
             </mat-form-field>
         </div>
     </form>

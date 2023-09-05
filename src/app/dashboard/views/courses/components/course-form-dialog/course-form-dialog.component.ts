@@ -1,7 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { Courses } from '../../models';
+import { Course } from '../../models';
 
 @Component({
   selector: 'app-course-form-dialog',
@@ -24,7 +24,7 @@ export class CourseFormDialogComponent {
 
   });
 
-  constructor(private dialogRef: MatDialogRef<CourseFormDialogComponent>, @Inject(MAT_DIALOG_DATA) private data?: Courses) {
+  constructor(private dialogRef: MatDialogRef<CourseFormDialogComponent>, @Inject(MAT_DIALOG_DATA) private data?: Course) {
 
     if (this.data) {
       this.nameControl.setValue(this.data.name);

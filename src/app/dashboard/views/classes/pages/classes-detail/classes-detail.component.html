@@ -1,27 +1,37 @@
 <button routerLink=".." mat-icon-button>
-    <mat-icon>arrow_back</mat-icon>
+  <mat-icon>arrow_back</mat-icon>
 </button>
 <mat-card>
-    <mat-card-content>
-      <h2>Detalles de la clase</h2>
-      <div>
-        <mat-form-field>
-            <mat-label>Nombre</mat-label>
+  <mat-card-content>
+    <h2>Detalles de la Inscripcion</h2>
+    <form class="grid">
+      <div class="field col-6">
+        <mat-form-field class="w-full" appearance="outline">
+          <mat-label>Nombre</mat-label>
           <input matInput placeholder="Nombre" [value]="classes?.name" disabled>
         </mat-form-field>
       </div>
-      <div>
-        <mat-form-field>
-            <mat-label>Turno</mat-label>
-          <input matInput placeholder="Tipo" [value]="classes?.turns"  disabled>
+      <div class="field col-6">
+        <mat-form-field class="w-full" appearance="outline">
+          <mat-label>Turno</mat-label>
+          <input matInput placeholder="Tipo" [value]="classes?.turns" disabled>
         </mat-form-field>
       </div>
-      <div>
-        <mat-form-field>
-            <mat-label>Nombre curso</mat-label>
-          <input matInput placeholder="Nombre instructor" [value]="classes?.nameCourse"  disabled>
+      <div class="field col-6">
+        <mat-form-field class="w-full" appearance="outline">
+          <mat-label>Nombre curso</mat-label>
+          <input matInput placeholder="Nombre curso"
+            [value]="classes?.course?.name" disabled>
         </mat-form-field>
       </div>
-    </mat-card-content>
-  </mat-card>
-  
+      <div class="field col-6">
+        <mat-form-field class="w-full" appearance="outline">
+          <mat-label>Nombre alumno</mat-label>
+          <input matInput placeholder="Nombre alumno"
+            [value]="classes?.student?.name + ' ' + classes?.student?.surname" disabled>
+        </mat-form-field>
+      </div>
+    </form>
+
+  </mat-card-content>
+</mat-card>
